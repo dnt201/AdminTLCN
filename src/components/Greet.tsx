@@ -5,8 +5,3 @@ export const Greet = () => {
     </div>
   );
 };
-
-const count = 123;
-const add = function () {
-  return 1 + 2;
-};
