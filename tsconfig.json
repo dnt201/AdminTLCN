@@ -17,7 +17,7 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "~/*": ["src/screens/*"],
+      "~/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
       "@images/*": ["src/assets/images/*"],
       "@redux/*": ["src/redux/*"],
