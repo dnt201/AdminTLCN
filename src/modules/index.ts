@@ -1,6 +1,5 @@
 import Footer from './Footer';
-import Header from './Header';
+import Navbar from './Navbar';
 import SideBar from './SideBar';
-import RightBar from './RightBar';
 
-export { Footer, Header, SideBar, RightBar };
+export { Footer, Navbar, SideBar };
