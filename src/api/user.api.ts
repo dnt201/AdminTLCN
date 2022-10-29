@@ -1,20 +1,18 @@
-import axios, { Method, AxiosResponse } from 'axios';
+import AxiosClient from './axiosClient/AxiosClient';
 
-const api = axios.create({
-  // Base URL: process.env.REACT_APP_HOST_BACK_END,
-  baseURL: 'https://rickandmortyapi.com/api',
-});
+export interface DtoUser {
+    email: string;
+    password: string;
+}
 
-const request = <T>(method: Method, url: string, params: any): Promise<AxiosResponse<T>> => {
-  return api.request<T>({
-    method,
-    url,
-    params,
-  });
+const userApi = {
+    login: (email: string, password: string) => {
+        const url = '/auth/login';
+        return AxiosClient.post(url, { email, password });
+    },
+    get: () => {
+        const url = '/category';
+        return AxiosClient.get(url);
+    },
 };
-
-// Define a default query function that will receive the query key
-export const defaultQueryFn = async ({ queryKey }: any): Promise<unknown> => {
-  const data = await request(queryKey[0], queryKey[1], queryKey[2]);
-  return data;
-};
+export default userApi;

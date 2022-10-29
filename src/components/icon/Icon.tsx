@@ -368,3 +368,14 @@ export const IconUserBorder = () => {
     </svg>
   );
 };
+
+export const IconAdd = () => {
+  return (
+    <svg width='25' height='25' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <path
+        d='M12 6.66667H9.33333V4H6.66667V6.66667H4V9.33333H6.66667V12H9.33333V9.33333H12V6.66667Z'
+        fill='#8392AB'
+      />
+    </svg>
+  );
+};
