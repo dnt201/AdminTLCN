@@ -1,27 +1,17 @@
 import { useState } from 'react';
-import ContentCard from '~/components/contentCard/ContentCard';
 import { Pagination, Avatar } from 'flowbite-react';
-import Chart from 'react-apexcharts';
 import { toast } from 'react-toastify';
 import { IconAdd } from '~/components/icon/Icon';
-import New from '../new/New';
-import BaseModalWrapper from '~/components/modal/BaseModalWrapper';
+import AxiosClient from '~/api/axiosClient/AxiosClient';
 
 const List = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-    const toggleModal = () => {
-        setIsModalVisible((wasModalVisible) => !wasModalVisible);
-    };
-
     const onPageChange = (page: number) => {
+        AxiosClient.get(`/locations/paging?pageNo=${page - 1}`).then((reponse) => {
+            console.log(reponse);
+        });
         setCurrentPage(page);
     };
-    const options = {
-        labels: ['Apple', 'Mango', 'Orange', 'Watermelon'],
-    };
-    const series = [44, 55, 13, 33];
 
     const handleDelete = () =>
         toast.success('Delete Success!', {
@@ -40,32 +30,13 @@ const List = () => {
 
     return (
         <>
-            <div className='m-5 p-5 flex'>
-                <div className='flex w-[50%] flex-wrap'>
-                    <ContentCard />
-                    <ContentCard />
-                    <ContentCard />
-                    <ContentCard />
-                </div>
-                <div className='w-[50%]'>
-                    <div className='bg-white rounded-2xl mt-2'>
-                        <Chart options={options} type='donut' series={series} width='80%' />
-                    </div>
-                </div>
-            </div>
-
-            <div className='p-5 bg-white mx-10 mb-10 rounded-2xl flex flex-col'>
+            <div className='p-5'>
                 <div className='px-10 mx-10 w-full flex justify-end'>
-                    <button
-                        className='flex items-center text-black bg-white p-1 mx-8 my-2 rounded-2xl border border-gray-c4'
-                        onClick={() => toggleModal()}
-                    >
+                    <button className='flex items-center text-black bg-white p-1 mx-8 my-2 rounded-2xl border border-gray-c4'>
                         <IconAdd />
                         <span className='flex items-center mr-2'>Add New</span>
                     </button>
                 </div>
-                <div id='modal-root'></div>
-                <BaseModalWrapper isModalVisible={isModalVisible} onBackdropClick={toggleModal} />
                 <div className='overflow-x-auto rounded-2xl mx-8 border border-gray-c4'>
                     <table className='bg-white  w-[100%] text-sm text-left text-gray-400 '>
                         <thead className='text-xs uppercase bg-white text-gray-c6  border-b border-secondary'>

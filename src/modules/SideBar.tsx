@@ -5,36 +5,41 @@ import {
     IconArrowUp,
     IconBlog,
     IconDashboard,
-    IconPage,
+    IconCategory,
     IconUser,
+    IconCourse,
+    IconComment,
+    IconAnalytic,
 } from '~/components/icon/Icon';
 import Logo from '~/components/logo/Logo';
 
 const SideBar = () => {
     const Menus = [
         { title: 'Dashboard', link: '/home' },
-        {
-            title: 'Pages',
-            link: '/users',
-            icon: <IconPage />,
-            submenu: true,
-            submenuItems: [{ title: 'Submenu 1' }, { title: 'Submenu 2' }, { title: 'Submenu 3' }],
-        },
         { title: 'Users', link: 'users', icon: <IconUser /> },
         {
-            title: 'Blogs',
-            link: 'blogs',
+            title: 'Posts',
+            link: 'posts',
             icon: <IconBlog />,
         },
-        { title: 'Courses', link: 'courses' },
-        { title: 'Category', link: 'category' },
-        { title: 'Comments', link: 'comments' },
-        { title: 'Analytic', link: 'analytic' },
-        { title: 'Setting', link: 'setting' },
+        { title: 'Courses', link: 'courses', icon: <IconCourse /> },
+        { title: 'Category', link: 'category', icon: <IconCategory /> },
+        { title: 'Comments', link: 'comments', icon: <IconComment /> },
+        {
+            title: 'Analysis',
+            link: 'analysis',
+            icon: <IconAnalytic />,
+            submenu: true,
+            submenuItems: [
+                { id: 0, title: 'Users', link: 'user' },
+                { id: 1, title: 'Posts', link: 'post' },
+                { id: 2, title: 'Comments', link: 'comment' },
+            ],
+        },
     ];
     const [submenuOpen, setSubmenuOpen] = useState(false);
     return (
-        <div className='bg-white h-fit rounded-xl m-4 w-20 lg:w-60'>
+        <div className='bg-white h-fit rounded-xl m-4 w-20 lg:w-60 fixed top-0'>
             <div className='flex justify-center p-10'>
                 <Logo />
                 <Link to={'/home'}>
@@ -68,12 +73,14 @@ const SideBar = () => {
                             {menu.submenu && submenuOpen && (
                                 <ul>
                                     {menu.submenuItems.map((submenuItem, index) => (
-                                        <li
-                                            key={index}
-                                            className='text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-gray-c2 rounded-md'
-                                        >
-                                            {submenuItem.title}
-                                        </li>
+                                        <Link to={`analysis/${submenuItem.link}`}>
+                                            <li
+                                                key={index}
+                                                className='text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-gray-c2 rounded-md'
+                                            >
+                                                {submenuItem.title}
+                                            </li>
+                                        </Link>
                                     ))}
                                 </ul>
                             )}
@@ -82,12 +89,7 @@ const SideBar = () => {
                 </ul>
             </div>
             <hr className='mx-6 border-1.5 border-gray-c2' />
-            <div className='p-6 flex flex-col'>
-                <ul>
-                    <li>Troi oi</li>
-                    <li>Troi oi</li>
-                </ul>
-            </div>
+            <div className='p-6 flex flex-col'></div>
         </div>
     );
 };

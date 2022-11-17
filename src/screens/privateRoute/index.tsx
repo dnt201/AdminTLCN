@@ -3,6 +3,11 @@ import Login from '../login/Login';
 
 const useAuth = () => {
     const user = { loggedIn: true };
+    if (window.location.pathname === '/home') {
+        user.loggedIn = true;
+    } else if (sessionStorage.getItem('user')) {
+        user.loggedIn = true;
+    } else user.loggedIn = false;
     return user && user.loggedIn;
 };
 

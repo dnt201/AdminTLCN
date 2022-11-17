@@ -1,16 +1,6 @@
-import { useEffect, useState } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import ContentCard from '~/components/contentCard/ContentCard';
-
-const ListCatgory = () => {
-    const [isConfirm, setIsConfirm] = useState(false);
-    useEffect(() => {
-        setTimeout(() => {
-            setIsConfirm(true);
-        }, 1000);
-    }, []);
+const ListCourse = () => {
     return (
-        <>
+        <div>
             <div className='flex flex-col'>
                 <div className='flex m-3 p-3'></div>
                 <div className='overflow-x-auto rounded-2xl mx-8 border boder-gray-c4'>
@@ -166,8 +156,8 @@ const ListCatgory = () => {
                     </table>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
-export default ListCatgory;
+export default ListCourse;
