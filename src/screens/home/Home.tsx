@@ -41,19 +41,6 @@ const Home = () => {
                         ))}
                     </div>
                 </div>
-                <div className='flex'>
-                    <div className='bg-white w-[50%] p-5 rounded-2xl ml-8'>
-                        <span className='text-base font-semibold p-3'>Sales overview</span>
-                        <Chart options={options} type='bar' series={series} width='80%' />
-                    </div>
-                    <div className='mx-8 w-[50%] px-3'>
-                        <img
-                            src={require('../../layouts/testImg.png')}
-                            alt='test'
-                            className='rounded-2xl h-full'
-                        />
-                    </div>
-                </div>
                 <div className='flex my-10'>
                     <div className='bg-white w-[50%] p-5 rounded-2xl ml-8'>
                         <span className='text-base font-semibold p-3'>Sales overview</span>
