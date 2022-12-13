@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import ContentCard from '~/components/contentCard/ContentCard';
 
-const ListCatgory = () => {
+const ListCategory = () => {
     const [isConfirm, setIsConfirm] = useState(false);
     useEffect(() => {
         setTimeout(() => {
@@ -170,4 +169,4 @@ const ListCatgory = () => {
     );
 };
 
-export default ListCatgory;
+export default ListCategory;

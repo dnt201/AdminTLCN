@@ -1,17 +1,22 @@
 {
-  "plugins": [
-    [
-      "module-resolver",
-      {
-        "alias": {
-          "~": "./src",
-          "@screens": "./src/screens",
-          "@assets": "./src/assets",
-          "@images": "./src/assets/images",
-          "@redux": "./src/redux",
-          "@components": "./src/components"
-        }
-      }
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "alias": {
+                    "~": "./src",
+                    "@screens": "./src/screens",
+                    "@app": "./src/app",
+                    "@DTO": "src/DTO",
+                    "@assets": "./src/assets",
+                    "@images": "./src/assets/images",
+                    "@redux": "./src/redux",
+                    "@components": "./src/components",
+                    "@icons": "./src/icons",
+                    "@api": "./src/api",
+                    "@util": "./src/util"
+                }
+            }
+        ]
     ]
-  ]
 }

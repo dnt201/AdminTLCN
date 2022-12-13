@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { Pagination, Avatar } from 'flowbite-react';
 import { toast } from 'react-toastify';
-import { IconAdd } from '~/components/icon/Icon';
-import AxiosClient from '~/api/axiosClient/AxiosClient';
+import { IconAdd } from '@components/icon/Icon';
 
 const List = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const onPageChange = (page: number) => {
-        AxiosClient.get(`/locations/paging?pageNo=${page - 1}`).then((reponse) => {
-            console.log(reponse);
-        });
+        // AxiosClient.get(`/locations/paging?pageNo=${page - 1}`).then((reponse) => {
+        //     console.log(reponse);
+        // });
         setCurrentPage(page);
     };
 

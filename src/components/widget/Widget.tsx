@@ -9,8 +9,8 @@ type WidgetProps = {
 
 const Widget = (props: WidgetProps) => {
     return (
-        <div className='flex flex-col w-[280px] bg-white rounded-2xl p-4 mx-2'>
-            <div className='flex justify-between'>
+        <div className='flex  flex-col w-1/4  bg-white rounded-2xl p-2 mb-4'>
+            <div className='flex gap-2'>
                 <div className='flex flex-col'>
                     <span className='text-secondary text-sm font-bold'>{props.title}</span>
                     <span className='font-bold text-lg'>{props.content}</span>

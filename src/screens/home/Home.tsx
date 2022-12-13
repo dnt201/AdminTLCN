@@ -1,7 +1,7 @@
-import Widget from '~/components/widget/Widget';
-import { IconClient, IconGlobalUser, IconMoney, IconSale } from '~/components/icon/Icon';
+import { IconClient, IconGlobalUser, IconMoney, IconSale } from '@components/icon/Icon';
+import Widget from '@components/widget/Widget';
 import Chart from 'react-apexcharts';
-
+import React from 'react';
 const widgets = [
     { title: `TODAY'S MONEY`, content: '$53,00', percent: 55, icon: <IconMoney /> },
     { title: `TODAY'S USERS`, content: '2,300', percent: 3, icon: <IconGlobalUser /> },
@@ -25,37 +25,31 @@ const Home = () => {
         },
     };
     return (
-        <>
-            <div>
-                <div className='flex p-4 bg-transparent m-2 rounded-lg'>
-                    <div className='flex'>
-                        {widgets.map((widget) => (
-                            <>
-                                <Widget
-                                    title={widget.title}
-                                    content={widget.content}
-                                    percent={widget.percent}
-                                    icon={widget.icon}
-                                />
-                            </>
-                        ))}
+        <div className='flex flex-col    flex-1 '>
+            <div className='flex justify-between '>
+                {widgets.map((widget) => (
+                    <React.Fragment key={widget.title}>
+                        <Widget
+                            title={widget.title}
+                            content={widget.content}
+                            percent={widget.percent}
+                            icon={widget.icon}
+                        />
+                    </React.Fragment>
+                ))}
+            </div>
+            <div className='flex  items-center justify-center my-auto pb-20'>
+                <div className='bg-white flex-1 rounded-2xl '>
+                    <span className='text-base font-semibold p-3'>Sales overview</span>
+                    <div className='w-[90%] mx-auto'>
+                        <Chart options={options} type='bar' series={series} width='100%' />
                     </div>
                 </div>
-                <div className='flex my-10'>
-                    <div className='bg-white w-[50%] p-5 rounded-2xl ml-8'>
-                        <span className='text-base font-semibold p-3'>Sales overview</span>
-                        <Chart options={options} type='bar' series={series} width='80%' />
-                    </div>
-                    <div className='mx-8 w-[50%] px-3'>
-                        <img
-                            src={require('../../layouts/testImg.png')}
-                            alt='test'
-                            className='rounded-2xl h-full'
-                        />
-                    </div>
+                <div className=' flex-1 px-3'>
+                    <img src={require('@images/testImg.png')} alt='test' className='rounded-2xl' />
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

@@ -1,7 +1,4 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
-    IconArrowDown,
     IconArrowUp,
     IconBlog,
     IconDashboard,
@@ -10,86 +7,129 @@ import {
     IconCourse,
     IconComment,
     IconAnalytic,
-} from '~/components/icon/Icon';
-import Logo from '~/components/logo/Logo';
+    IconArrowDown,
+    IconSetting,
+} from '@components/icon/Icon';
+import React, { useState } from 'react';
+import Logo from '@components/logo/Logo';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@app/store';
+import { userLogout } from '@redux/userSlice';
+import { toast } from 'react-toastify';
 
 const SideBar = () => {
     const Menus = [
         { title: 'Dashboard', link: '/home' },
-        { title: 'Users', link: 'users', icon: <IconUser /> },
+        { title: 'Users', link: '/users', icon: <IconUser /> },
         {
             title: 'Posts',
-            link: 'posts',
+            link: '/posts',
             icon: <IconBlog />,
         },
-        { title: 'Courses', link: 'courses', icon: <IconCourse /> },
-        { title: 'Category', link: 'category', icon: <IconCategory /> },
-        { title: 'Comments', link: 'comments', icon: <IconComment /> },
+        { title: 'Tag', link: '/tag', icon: <IconCourse /> },
+        { title: 'Category', link: '/category', icon: <IconCategory /> },
+        { title: 'Comments', link: '/comments', icon: <IconComment /> },
         {
             title: 'Analysis',
-            link: 'analysis',
+            link: '/analysis',
             icon: <IconAnalytic />,
             submenu: true,
             submenuItems: [
-                { id: 0, title: 'Users', link: 'user' },
-                { id: 1, title: 'Posts', link: 'post' },
-                { id: 2, title: 'Comments', link: 'comment' },
+                { id: 0, title: 'Users', link: '/user' },
+                { id: 1, title: 'Posts', link: '/post' },
+                { id: 2, title: 'Comments', link: '/comment' },
             ],
         },
     ];
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch<AppDispatch>();
+    const logoutHandle = async () => {
+        const result = await dispatch(userLogout());
+        if (result.payload === 200) {
+            toast.error('Logout success!');
+        } else {
+            localStorage.clear();
+            console.log(result);
+        }
+        navigate('/login');
+        console.log(result);
+    };
     const [submenuOpen, setSubmenuOpen] = useState(false);
     return (
-        <div className='bg-white h-fit rounded-xl m-4 w-20 lg:w-60 fixed top-0'>
-            <div className='flex justify-center p-10'>
-                <Logo />
-                <Link to={'/home'}>
-                    <h1 className='text-sm font-OpenSans font-bold'>Teaching Me</h1>
-                </Link>
-            </div>
-            <hr className='mx-6 border-1.5 border-gray-c2' />
-            <div className='px-6'>
-                <ul className='pt-2'>
-                    {Menus.map((menu, index) => (
-                        <>
-                            <li
-                                key={index}
-                                className='text-black text-sm flex font-OpenSans items-center gap-x-4 cursor-pointer p-2 hover:bg-gray-c2 rounded-md mt-2 justify-between'
-                            >
-                                <Link to={menu.link} className='flex items-center'>
-                                    <span className='text-2l block float-left'>
-                                        {menu.icon ? menu.icon : <IconDashboard />}
+        <div
+            className='bg-white h-screen rounded-xl  w-1/5
+        fixed  invisible overflow-y-auto hover:visible   pt-6  group
+        '
+        >
+            <div className='flex flex-col visible border-gray-c2  border-r-[1px]  '>
+                <div className=' flex justify-center '>
+                    <Logo />
+                    <Link to={'/home'}>
+                        <h1 className='text-sm  font-OpenSans font-bold'>Teaching Me</h1>
+                    </Link>
+                </div>
+                <hr className='mx-6 border-1.5 border-gray-c2' />
+                <div className=''>
+                    <ul className='pt-2'>
+                        {Menus.map((menu, index) => (
+                            <React.Fragment key={menu.title}>
+                                <li
+                                    onClick={() => navigate(menu.link)}
+                                    key={index}
+                                    className={
+                                        'text-black text-sm flex font-OpenSans items-center gap-x-4 cursor-pointer p-2 hover:bg-gray-c2 rounded-md mt-2 justify-between' +
+                                        (window.location.pathname.search(menu.link) === 0 &&
+                                            ' bg-gray-c2 rounded-none hover:bg-gray-c2')
+                                    }
+                                >
+                                    <span className={'flex items-center  '}>
+                                        <span className='text-2l block float-left'>
+                                            {menu.icon ? menu.icon : <IconDashboard />}
+                                        </span>
+                                        <span className='text-base font-OpenSans font-medium flex-1 duration-200'>
+                                            {menu.title}
+                                        </span>
                                     </span>
-                                    <span className='text-base font-OpenSans font-medium flex-1 duration-200'>
-                                        {menu.title}
-                                    </span>
-                                </Link>
 
-                                {menu.submenu && (
-                                    <span onClick={() => setSubmenuOpen(!submenuOpen)}>
-                                        {!submenuOpen ? <IconArrowDown /> : <IconArrowUp />}
-                                    </span>
-                                )}
-                            </li>
-                            {menu.submenu && submenuOpen && (
-                                <ul>
-                                    {menu.submenuItems.map((submenuItem, index) => (
-                                        <Link to={`analysis/${submenuItem.link}`}>
-                                            <li
-                                                key={index}
-                                                className='text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-gray-c2 rounded-md'
+                                    {menu.submenu && (
+                                        <span onClick={() => setSubmenuOpen(!submenuOpen)}>
+                                            {!submenuOpen ? <IconArrowDown /> : <IconArrowUp />}
+                                        </span>
+                                    )}
+                                </li>
+                                {menu.submenu && submenuOpen && (
+                                    <ul>
+                                        {menu.submenuItems.map((submenuItem) => (
+                                            <Link
+                                                to={`analysis/${submenuItem.link}`}
+                                                key={submenuItem.id}
                                             >
-                                                {submenuItem.title}
-                                            </li>
-                                        </Link>
-                                    ))}
-                                </ul>
-                            )}
-                        </>
-                    ))}
-                </ul>
+                                                <li className='text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-gray-c2 rounded-md'>
+                                                    {submenuItem.title}
+                                                </li>
+                                            </Link>
+                                        ))}
+                                    </ul>
+                                )}
+                            </React.Fragment>
+                        ))}
+                        <div className='flex-1 h-[1px] bg-slate-600'></div>
+                        <li
+                            onClick={() => {
+                                logoutHandle();
+                            }}
+                            className='text-black text-base flex justify-center font-OpenSans items-center gap-x-4 cursor-pointer p-2 hover:bg-gray-c2  '
+                        >
+                            <span className='text-base font-OpenSans text-danger  text-center font-medium flex-1 duration-200'>
+                                Log out
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div className='p-4 flex flex-col'></div>
             </div>
-            <hr className='mx-6 border-1.5 border-gray-c2' />
-            <div className='p-6 flex flex-col'></div>
         </div>
     );
 };

@@ -1,9 +1,9 @@
+import BreadcrumbTest from '@components/breadcrumb/BreadcrumbTest';
+import { IconNotification, IconSearch, IconSetting, IconSignIn } from '@components/icon/Icon';
 import { Breadcrumb } from 'flowbite-react';
 import BreadcrumbItem from 'flowbite-react/lib/esm/components/Breadcrumb/BreadcrumbItem';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import BreadcrumbTest from '~/components/breadcrumb/BreadcrumbTest';
-import { IconNotification, IconSearch, IconSetting, IconSignIn } from '~/components/icon/Icon';
 
 const Navbar = () => {
     const [crumbs, setCrumbs] = useState(['Home', 'Category', 'Users', 'Posts']);
@@ -12,7 +12,7 @@ const Navbar = () => {
     };
     return (
         <>
-            <div className='flex h-8 bg-transparent mt-3 justify-between'>
+            <div className='flex  bg-transparent mt-3 justify-between'>
                 {/* <Breadcrumb
                     aria-label='Default breadcrumb example'
                     className='px-5 bg-gray-50 dark:bg-gray-800 text-base text-white'
