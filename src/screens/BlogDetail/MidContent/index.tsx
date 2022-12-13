@@ -76,7 +76,7 @@ const MidContent: React.FC<iMidContentProps> = (props) => {
         }
     }
     return (
-        <div className={'pb-[20vh] ' + ' ' + className}>
+        <div className={' ml-4 ' + className}>
             {status !== undefined && status !== 'Approve' && (
                 <h6 className=' text-center'>
                     <i className='text-no text-xs'>
@@ -133,50 +133,6 @@ const MidContent: React.FC<iMidContentProps> = (props) => {
                             <i>Ows... Nothing tags to show!!! </i>
                         </span>
                     )}
-                </div>
-                <h6 className='mt-2'>All rights reserved</h6>
-                <div className='mt-2 w-full flex-row-reverse flex gap-4 items-center'>
-                    <button
-                        className=''
-                        data-tip='Hiển thị các actions với bài viết'
-                        data-for='action'
-                    >
-                        <More className='w-7 h-7' />
-                        {/* <ReactTooltip
-                            textColor='#FF4401'
-                            id='action'
-                            place='bottom'
-                            effect='solid'
-                        /> */}
-                    </button>
-
-                    <button
-                        className=''
-                        data-tip='Share bài viết này lên facebook'
-                        data-for='facebookShareBotNe'
-                    >
-                        <FacebookLogo className='w-7 h-7' />
-                        {/* <ReactTooltip
-              textColor="#FF4401"
-              id="facebookShareBotNe"
-              place="bottom"
-              effect="solid"
-            /> */}
-                    </button>
-
-                    <button
-                        className=' '
-                        data-tip='Share bài viết này lên Twitter'
-                        data-for='twitterShareBotNe'
-                    >
-                        <Twitter className='w-7 h-7' />
-                        {/* <ReactTooltip
-              textColor="#FF4401"
-              id="twitterShareBotNe"
-              place="bottom"
-              effect="solid"
-            /> */}
-                    </button>
                 </div>
             </div>
         </div>

@@ -57,6 +57,11 @@ const postApi = {
         const url = `/post/${postId}`;
         return axiosClient.get(url);
     },
+    getPostDetailByIdAdmin: (postId: string) => {
+        const url = `/post/view/admin/${postId}`;
+        return axiosClient.get(url);
+    },
+
     getListPostHaveBeenVote: (pageNumber?: number) => {
         const url = `/post/all-post-vote`;
         return axiosClient.post(url, {

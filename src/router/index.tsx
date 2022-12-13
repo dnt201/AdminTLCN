@@ -1,10 +1,12 @@
 import { AppDispatch, RootState } from '@app/store';
 import { clearAllUser, userGetMe } from '@redux/userSlice';
-import DetailPost from '@screens/detail/DetailPost';
+import BlogDetail from '@screens/BlogDetail';
 
 import Home from '@screens/home/Home';
 
 import ListPost from '@screens/ListPost';
+import ListTag from '@screens/ListTag';
+import AddTag from '@screens/ListTag/AddTag';
 import Login from '@screens/login';
 
 import SomeThingWentWrong from '@screens/SomeThingWentWrong';
@@ -21,7 +23,6 @@ const DeClareRouter = () => {
     const accessTokenFromLocalStorage = localStorage.getItem('accessToken');
 
     const { error, accessToken, userInfo } = useSelector((state: RootState) => state.users);
-
     console.log(accessTokenFromLocalStorage !== null);
     const [beLogged, setLogged] = useState(accessTokenFromLocalStorage !== null);
     const dispatch = useDispatch<AppDispatch>();
@@ -63,27 +64,18 @@ const DeClareRouter = () => {
             >
                 <Route index element={<Home />} />
                 <Route path='home' element={<Home />} />
-                {/* <Route path='users'>
-                    <Route index element={<ListUser />} />
-                    <Route path=':userId' element={<DetailUser />} />
-                    <Route path='new' element={<NewUser />} />
-                </Route> */}
-                {/* <Route path='category'>
-                    <Route index element={<ListCategory />} />
-                    <Route path=':categoryId' element={<DetailCategory />} />
-                    <Route path='new' element={<NewCategory />} />
-                </Route> */}
                 <Route path='posts'>
                     <Route index element={<ListPost />} />
-                    <Route path=':postId' element={<DetailPost />} />
+                    <Route path=':postId' element={<BlogDetail />} />
                     {/* <Route path=':postId' element={<DetailPost />} />
                     <Route path='new' element={<NewPost />} /> */}
                 </Route>
-                {/* <Route path='courses'>
-                    <Route index element={<ListCourse />} />
-                    <Route path=':courseId' element={<DetailPost />} />
-                    <Route path='new' element={<NewPost />} />
-                </Route> */}
+                <Route path='tags'>
+                    <Route index element={<ListTag />} />
+                    <Route path='addTag' element={<AddTag />} />
+                    {/* <Route path=':courseId' element={<DetailPost />} />
+                    <Route path='new' element={<NewPost />} /> */}
+                </Route>
                 {/* <Route path='analysis'>
                     <Route index element={<NotFound />} />
                     <Route path='user' element={<NotFound />} />

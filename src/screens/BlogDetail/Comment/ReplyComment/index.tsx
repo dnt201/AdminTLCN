@@ -100,7 +100,7 @@ const ReplyComment: React.FC<iPropsReply> = (props) => {
                             {sender.username}
                         </span>
                     </Link>
-                    <span className='text-s'>{dateModified.convertToDay()}</span>
+                    <span className='text-s'>{String(dateModified).convertToDay()}</span>
                 </div>
             </div>
             {/* End header */}

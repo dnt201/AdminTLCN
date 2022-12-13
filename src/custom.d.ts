@@ -13,3 +13,11 @@ declare module '*.jpg';
 declare interface Array<T> {
     contains: (obj: T) => boolean;
 }
+
+// Array.prototype.contains = function (obj) {
+//   var i = 0;
+//   for (; i < this.length; i++) {
+//     if (this[i] === obj) return true;
+//   }
+//   return false;
+// };

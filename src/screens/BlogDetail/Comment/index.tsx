@@ -10,11 +10,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import CommentItem from './CommentItem';
 import avatarDefault from '@images/userDefault.png';
-import ReactTooltip from 'react-tooltip';
 import { isFulfilled } from '@reduxjs/toolkit';
 import Pagination from '@components/pagination';
 import commentApi from '@api/commentApi';
 import { toast } from 'react-toastify';
+import ReactTooltip from 'react-tooltip';
 
 export interface iUserTag {
     id: string;
@@ -159,11 +159,11 @@ const ReplyComment: React.FC<iProps> = (props) => {
                                         <Photo />
                                     </i>
                                     {/* <ReactTooltip
-                    textColor="#FF4401"
-                    id="photoEmoji"
-                    place="bottom"
-                    effect="solid"
-                  /> */}
+                                        textColor='#FF4401'
+                                        id='photoEmoji'
+                                        place='bottom'
+                                        effect='solid'
+                                    /> */}
                                 </div>
                             </div>
                         </div>

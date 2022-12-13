@@ -4,19 +4,23 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Trash, Write } from '@icons/index';
 import postApi from '@api/postApi';
 import { toast } from 'react-toastify';
+import { lazy } from 'yup';
 interface iProps extends React.HTMLProps<HTMLDivElement> {
     idPost: string;
+    img?: string;
+    lazy?: boolean;
 }
 const ActionModal: React.FC<iProps> = (props) => {
-    const { idPost, className } = props;
+    const { idPost, className, lazy } = props;
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
     return (
         <div
             className={
+                '  rounded-md py-2 w-fit flex flex-col gap-2  bg-[#f1f1f1] absolute top-0   z-1000000 text-bg' +
                 className +
-                '  rounded-md py-2 w-fit flex flex-col gap-2  bg-[#f1f1f1] absolute top-0 -right-4 translate-x-full  z-1000000 text-bg'
+                (lazy ? ' -translate-x-1/2   ' : ' translate-x-full -right-4  ')
             }
         >
             <Link to={`/edit-post/${idPost}`}>

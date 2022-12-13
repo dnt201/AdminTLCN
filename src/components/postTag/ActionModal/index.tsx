@@ -10,11 +10,11 @@ interface iProps extends React.HTMLProps<HTMLDivElement> {
     approve?: boolean;
     curImg?: string;
     setPage: (number: number) => void;
-
+    setShowActionModal: (b: boolean) => void;
     lazy?: boolean;
 }
 const ActionModal: React.FC<iProps> = (props) => {
-    const { idPost, className, approve, curImg, lazy, setPage } = props;
+    const { idPost, className, approve, curImg, lazy, setPage, setShowActionModal } = props;
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     //
@@ -39,7 +39,7 @@ const ActionModal: React.FC<iProps> = (props) => {
                             duration: 2000,
                         });
 
-                        setPage(-1);
+                        setPage(-2);
                     } else {
                         toast.error(`Some thing went wrong ${result.status}`, {
                             id: toastId,
@@ -121,6 +121,7 @@ const ActionModal: React.FC<iProps> = (props) => {
                         className='p-1  flex items-center gap-1  px-3 w-full hover:bg-primaryHover hover:text-primary '
                         onClick={(e) => {
                             setIsShowConfirmApprove(true);
+
                             e.stopPropagation();
                         }}
                     >

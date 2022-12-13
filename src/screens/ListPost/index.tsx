@@ -56,7 +56,7 @@ const ListPost = () => {
     useEffect(() => {
         console.log('-----------', curPage, nameSearch, filter);
         setLoading(true);
-        if (curPage === -1) setCurPage(1);
+        if (curPage < 0) setCurPage(1);
         else {
             if (filter === 'approve') {
                 getAllPosted();

@@ -27,7 +27,7 @@ const SideBar = () => {
             link: '/posts',
             icon: <IconBlog />,
         },
-        { title: 'Tag', link: '/tag', icon: <IconCourse /> },
+        { title: 'Tag', link: '/tags', icon: <IconCourse /> },
         { title: 'Category', link: '/category', icon: <IconCategory /> },
         { title: 'Comments', link: '/comments', icon: <IconComment /> },
         {

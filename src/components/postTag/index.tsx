@@ -108,6 +108,7 @@ const PostTag: React.FC<iLazy> = (props) => {
                                 </button>
                                 {showActionModal ? (
                                     <ActionModal
+                                        setShowActionModal={setShowActionModal}
                                         setPage={setPage}
                                         lazy={true}
                                         approve={approve}
@@ -160,7 +161,7 @@ const PostTag: React.FC<iLazy> = (props) => {
                         <div className='flex flex-col'>
                             <span className='font-semibold text-sm'>{owner.username}</span>
                             <span className='font-semibold text-ss'>
-                                {/* {dateModified && dateModified.getNumberOfDayFromNow()} */}
+                                {dateModified && dateModified.getNumberOfDayFromNow()}
                             </span>
                         </div>
                     </Link>
