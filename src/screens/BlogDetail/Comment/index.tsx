@@ -82,7 +82,7 @@ const ReplyComment: React.FC<iProps> = (props) => {
                     setListComment(result.data.data);
                     setPagingListComment(result.data.page);
                 } else {
-                    toast.error('Fetch list comment error');
+                    toast.error('Lấy danh sách comment lỗi');
                 }
                 setLoading(false);
             }

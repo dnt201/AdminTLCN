@@ -78,7 +78,9 @@ axiosClient.interceptors.response.use(
                     _error.response.status === 401 &&
                     _error.response.data.message === 'Unauthorized'
                 )
-                    toast.error('Refresh hết hạn');
+                    toast.error('Refresh hết hạn', {
+                        autoClose: 1000,
+                    });
                 Promise.reject(_error);
             }
         } else if (error.response) {

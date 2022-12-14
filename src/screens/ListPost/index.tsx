@@ -46,7 +46,7 @@ const ListPost = () => {
             console.log(rs);
             setPaging(rs.data.result.page);
             setListPost(rs.data.result.data);
-        } else toast.error('Fetch list post error');
+        } else toast.error('Lấy danh sách post lỗi');
         setTimeout(() => {
             setLoading(false);
         }, 500);
@@ -57,7 +57,7 @@ const ListPost = () => {
             console.log(rs);
             setPaging(rs.data.result.page);
             setListPost(rs.data.result.data);
-        } else toast.error('Fetch list post error');
+        } else toast.error('Lấy danh sách post lỗi');
         setTimeout(() => {
             setLoading(false);
         }, 500);

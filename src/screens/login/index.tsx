@@ -23,9 +23,11 @@ const Login = () => {
     return (
         <div className='flex justify-center bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 bg-repeat h-screen'>
             <div className='flex flex-col items-center m-auto p-5 bg-white rounded-2xl shadow-lg w-[40%]'>
-                <span className='flex items-center gap-2'>
+                <span className='flex items-center gap-2 justify-center'>
                     <h1 className='text-black text-3xl font-bold'>Teaching Me</h1>
-                    <IconUser />
+                    <div className='mt-auto'>
+                        <IconUser />
+                    </div>
                 </span>
 
                 <div className='flex flex-col m-4 w-[70%]'>

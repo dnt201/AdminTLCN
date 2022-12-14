@@ -41,7 +41,7 @@ const FormLogin: React.FC<iPropsLogin> = (props) => {
         };
         const a = await dispatch(userLogin(user));
         if (a.payload.accessToken) {
-            toast.success('Login success', {
+            toast.success('Đăng nhập thành công!', {
                 pauseOnHover: false,
             });
             navigate('/');

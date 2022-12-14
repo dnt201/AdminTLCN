@@ -48,7 +48,9 @@ const SideBar = () => {
     const logoutHandle = async () => {
         const result = await dispatch(userLogout());
         if (result.payload === 200) {
-            toast.error('Logout success!');
+            toast.success('Đăng xuất thành công!', {
+                autoClose: 1000,
+            });
         } else {
             localStorage.clear();
             console.log(result);
@@ -80,7 +82,7 @@ const SideBar = () => {
                                         if (menu.link === '/update')
                                             toast.warning(
                                                 'Tính năng đang được cập nhập! Vui lòng thử lại sau!',
-                                                { autoClose: 2500 },
+                                                { autoClose: 2000 },
                                             );
                                         else navigate(menu.link);
                                     }}

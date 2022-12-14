@@ -110,7 +110,7 @@ const BlogDetail = () => {
 
                         setPage(-2);
                     } else {
-                        toast.error(`Some thing went wrong ${result.status}`, {
+                        toast.error(`Có gì đó không đúng ${result.status}`, {
                             id: toastId,
                             duration: 2000,
                         });
@@ -136,7 +136,7 @@ const BlogDetail = () => {
                         // if (redirect) navigate(`${redirect}`);
                         // else navigate('/');
                     } else {
-                        toast.error(`Some thing went wrong ${result.status}`, {
+                        toast.error(`Có gì đó không đúng ${result.status}`, {
                             id: toastId,
                             duration: 2000,
                         });

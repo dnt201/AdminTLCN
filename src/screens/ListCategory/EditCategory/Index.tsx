@@ -100,7 +100,7 @@ const EditCategory = () => {
                     }, 1000);
                 };
                 editCategory();
-            } else toast.error(`Reload, try again!`);
+            } else toast.error(`Lỗi rồi, làm ơn thử lại!`);
         }
         setIsConfirm(false);
     }, [isConfirm]);

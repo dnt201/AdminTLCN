@@ -31,6 +31,7 @@ const Pagination: React.FC<iLazy> = (props) => {
                     if (maxPage !== 0)
                         toast.error('Số trang không hợp lệ', {
                             pauseOnHover: false,
+                            autoClose: 1000,
                         });
                 }
             }, 1000);
@@ -44,6 +45,7 @@ const Pagination: React.FC<iLazy> = (props) => {
                 setCurPage(1);
                 toast.error('Số trang không hợp lệ', {
                     pauseOnHover: false,
+                    autoClose: 1000,
                 });
             }
         } else {

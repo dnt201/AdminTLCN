@@ -115,7 +115,7 @@ const EditTag = () => {
                     }, 1000);
                 };
                 addPost();
-            } else toast.error(`Reload, try again!`);
+            } else toast.error(`Lỗi rồi, làm ơn thử lại!`);
         }
         setIsConfirm(false);
     }, [isConfirm]);

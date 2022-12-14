@@ -45,7 +45,7 @@ const ActionModal: React.FC<iProps> = (props) => {
                         });
                         navigate('/');
                     } else {
-                        toast.error(`Some thing went wrong ${result.status}`, {
+                        toast.error(`Có gì đó không đúng ${result.status}`, {
                             toastId: toastId,
                             autoClose: 5000,
                         });
