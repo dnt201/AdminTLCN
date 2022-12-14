@@ -7,6 +7,7 @@ import Home from '@screens/home/Home';
 import ListPost from '@screens/ListPost';
 import ListTag from '@screens/ListTag';
 import AddTag from '@screens/ListTag/AddTag';
+import EditTag from '@screens/ListTag/EditTag';
 import Login from '@screens/login';
 
 import SomeThingWentWrong from '@screens/SomeThingWentWrong';
@@ -73,6 +74,7 @@ const DeClareRouter = () => {
                 <Route path='tags'>
                     <Route index element={<ListTag />} />
                     <Route path='addTag' element={<AddTag />} />
+                    <Route path='editTag/:tagId' element={<EditTag />} />
                     {/* <Route path=':courseId' element={<DetailPost />} />
                     <Route path='new' element={<NewPost />} /> */}
                 </Route>

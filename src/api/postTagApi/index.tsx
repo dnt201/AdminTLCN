@@ -42,5 +42,23 @@ const postTagApi = {
 
         return axiosClient.post(url, formData);
     },
+    editPostTag: (id: string, postData: postTagCreate) => {
+        const url = `/post/post-tag/edit/${id}`;
+
+        const formData = new FormData();
+        if (postData.file !== undefined && postData.file !== null)
+            formData.append('file', postData.file);
+        formData.append('colorCode', postData.colorCode);
+        formData.append('displayName', postData.displayName);
+        formData.append('postTagName', postData.postTagName);
+        // formData.append('tags', postData.tags.toString());
+
+        return axiosClient.put(url, formData);
+    },
+    deleteTag: (id: string) => {
+        const url = `/post/post-tag/delete/${id}`;
+
+        return axiosClient.delete(url);
+    },
 };
 export default postTagApi;

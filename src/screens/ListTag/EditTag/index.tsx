@@ -1,75 +1,145 @@
-import { iPage } from '@DTO/Pagination';
-import { iTag } from '@DTO/Tag';
-import { MagnifyingGlass, Tag, UpImage, XMark } from '@icons/index';
-import Pagination from '@components/pagination';
-import toast from 'react-hot-toast';
-
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { BeatLoader, ClipLoader } from 'react-spinners';
-import userApi from '@api/userApi';
 import postTagApi, { postTagCreate } from '@api/postTagApi';
-import PostTag from '@components/postTag';
-import { IconAdd } from '@components/icon/Icon';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@app/store';
-import Dropzone from 'react-dropzone';
-import { SketchPicker } from 'react-color';
 import PublishConfirm from '@components/PublishConfirm';
-import { postCreate } from '@api/postApi';
-const AddTag = () => {
-    const [nameSearch, setNameSearch] = useState('');
+import { iTag } from '@DTO/Tag';
+import { UpImage, XMark } from '@icons/index';
+import BlogNotFound from '@screens/BlogDetail/NotFound';
+import React, { useState, useEffect } from 'react';
+import { SketchPicker } from 'react-color';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import Dropzone from 'react-dropzone';
+import { BarLoader } from 'react-spinners';
+import defaultPost from '@images/default.jpg';
+
+const EditTag = () => {
+    const param = useParams();
     const navigate = useNavigate();
-
-    // const { show, setShow } = props;
-    const divPopUpRef = useRef<HTMLDivElement>(null);
-    const dispatch = useDispatch<AppDispatch>();
-
+    const { tagId } = param;
     const [isDropOn, setDropOn] = useState(false);
-    const [loading, setLoading] = useState(false);
 
-    //form
-    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [selectedImage, setSelectedImage] = useState<File | null>();
+
+    const [curLinkThumnail, setCurLinkThumnail] = useState<boolean>(false);
     const [name, setName] = useState('');
     const [color, setColor] = useState('#' + Math.ceil(Math.random() * 16777215).toString(16));
 
-    //
+    const [lazyFalse, setLazyFalse] = useState(false);
+    const [curTag, setCurTag] = useState<iTag>();
+    const [loading, setLoading] = useState(true);
+
     const [isConfirm, setIsConfirm] = useState(false);
     const [isShowConfirm, setIsShowConfirm] = useState(false);
     const [loadingConfirm, setLoadingConfirm] = useState(false);
 
-    console.log(color, '-------------');
+    const getTagAndMap = async () => {
+        const result = await postTagApi.getAllPostTag10000();
+
+        if (result.status === 200 || result.status === 201) {
+            let listTag: iTag[] = result.data.result.data;
+            var tempTag: iTag | undefined;
+            console.log(result);
+            listTag.forEach((element) => {
+                if (element.id === tagId) {
+                    tempTag = element;
+                    return;
+                }
+            });
+            if (tempTag !== undefined) {
+                console.log(tempTag);
+                setCurTag(tempTag);
+                setColor(tempTag.colorCode);
+                setName(tempTag.postTagName);
+                console.log('cccc', tempTag.thumbnailLink);
+                console.log(tempTag.thumbnailLink !== null);
+                if (tempTag.thumbnailLink !== null) {
+                    console.log(tempTag, ',-----');
+                    const tempBlob = await fetch(tempTag.thumbnailLink);
+                    // console.log( ătempBlob.blob());
+                    if (tempBlob) {
+                        let blob = await tempBlob.blob();
+                        const file = new File([blob], 'image.jpg', { type: blob.type });
+                        setSelectedImage(file);
+                        // console.log(tempBlob, '-----');
+                    } else setSelectedImage(null);
+                }
+            }
+        } else {
+            setLazyFalse(true);
+            toast.error(result.data.message);
+        }
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        //Check param, thực ra là không bao giờ vào đây :))
+        if (tagId === undefined) {
+            setLazyFalse(true);
+        } else {
+            //Get infor curCate + list post
+            setLoading(true);
+            getTagAndMap();
+        }
+    }, []);
+
     useEffect(() => {
         if (isConfirm === true) {
-            const addPost = async () => {
-                const toastId = toast.loading('Loading...');
-                let tPostTag: postTagCreate = {
-                    colorCode: color,
-                    displayName: name,
-                    postTagName: name,
-                    file: selectedImage ? selectedImage : undefined,
-                };
-                console.log(color);
-                const result = await postTagApi.createPostTag(tPostTag);
+            if (curTag?.id) {
+                const addPost = async () => {
+                    const toastId = toast.loading('Loading...');
+                    let tPostTag: postTagCreate = {
+                        colorCode: color,
+                        displayName: name,
+                        postTagName: name,
+                        file: selectedImage ? selectedImage : undefined,
+                    };
+                    console.log(color);
+                    const result = await postTagApi.editPostTag(curTag.id, tPostTag);
 
-                setTimeout(() => {
-                    if (result.status === 200 || result.status === 201 || result.status === 202) {
-                        toast.success('Thêm post tag thành công!', {
-                            id: toastId,
-                            duration: 2000,
-                        });
-                        navigate('/tags');
-                    } else {
-                        toast.error(`${result.data.message}`, {
-                            id: toastId,
-                            duration: 2000,
-                        });
-                    }
-                }, 1000);
-            };
-            addPost();
+                    setTimeout(() => {
+                        if (
+                            result.status === 200 ||
+                            result.status === 201 ||
+                            result.status === 202
+                        ) {
+                            toast.success('Chỉnh sửa post tag thành công!', {
+                                id: toastId,
+                                duration: 2000,
+                            });
+                            navigate('/tags');
+                        } else {
+                            toast.error(`${result.data.message}`, {
+                                id: toastId,
+                                duration: 2000,
+                            });
+                        }
+                    }, 1000);
+                };
+                addPost();
+            } else toast.error(`Reload, try again!`);
         }
+        setIsConfirm(false);
     }, [isConfirm]);
+    if (loading)
+        return (
+            <div className='flex-1 pl-2 flex flex-col'>
+                <div className='flex  items-center border-gray-c3 border-b-[1px] focus-within:border-gray-400 '>
+                    <div className='flex flex-1 items-center mr-2 '>
+                        <button
+                            className='py-2 px-4 rounded-md bg-gray-c3 flex justify-center '
+                            onClick={() => navigate(-1)}
+                        >
+                            Back
+                        </button>
+                        <h4 className='flex-1 text-center '> Edit post's tag</h4>
+                    </div>
+                </div>
+                <div className='flex justify-center flex-1 items-center mb-8'>
+                    <BarLoader />
+                </div>
+            </div>
+        );
+
+    if (lazyFalse) return <BlogNotFound />;
     return (
         <div className='flex-1 pl-2 flex flex-col'>
             {isShowConfirm ? (
@@ -79,9 +149,9 @@ const AddTag = () => {
                     loading={loadingConfirm}
                     setConfirmed={setIsConfirm}
                     setShow={setIsShowConfirm}
-                    header='Tạo post tag?'
+                    header='Chỉnh sửa post tag?'
                     message='Không còn gì thay đổi, bạn có thực sự muốn tạo post tag nay?'
-                    // img={curImg ? curImg : defaultPost}
+                    // img={selectedImage ? selectedImage : defaultPost}
                 />
             ) : null}
             <div className='flex  items-center border-gray-c3 border-b-[1px] focus-within:border-gray-400 '>
@@ -92,7 +162,7 @@ const AddTag = () => {
                     >
                         Back
                     </button>
-                    <h4 className='flex-1 text-center '> Add new post's tag</h4>
+                    <h4 className='flex-1 text-center '> Edit post's tag</h4>
                 </div>
             </div>
             <div className='flex  justify-center  mt-8  flex-1  gap-2'>
@@ -103,7 +173,7 @@ const AddTag = () => {
                 />
 
                 <div className='flex flex-col '>
-                    {selectedImage ? (
+                    {selectedImage !== null && selectedImage !== undefined ? (
                         <div className={'flex  items-center  justify-center pt-4'}>
                             <div className='w-fit relative'>
                                 <img
@@ -140,7 +210,10 @@ const AddTag = () => {
                                 console.log(files);
                                 if (files.length > 1)
                                     toast.error('Vui lòng chọn duy nhất "1" ảnh!');
-                                else if (files[0]) setSelectedImage(files[0]);
+                                else if (files[0]) {
+                                    setSelectedImage(files[0]);
+                                    setCurLinkThumnail(true);
+                                }
                             }}
                         >
                             {({ getRootProps, getInputProps }) => (
@@ -184,20 +257,20 @@ const AddTag = () => {
                             e.stopPropagation();
                             setIsShowConfirm(true);
                         }}
-                        disabled={color.length <= 0 || name.length <= 0}
+                        disabled={
+                            selectedImage === null ||
+                            name.length <= 0 ||
+                            (curTag?.postTagName === name &&
+                                curTag.colorCode === color &&
+                                curLinkThumnail === false)
+                        }
                     >
-                        Create
+                        Edit
                     </button>
                 </div>
             </div>
-            {/* <div className='flex-1 flex  justify-center mt-[10vh]  gap-1'>
-                <span className='mt-[4px]'>
-                    <ClipLoader size={20} />
-                </span>
-                Đang tìm kiếm
-            </div> */}
         </div>
     );
 };
 
-export default AddTag;
+export default EditTag;

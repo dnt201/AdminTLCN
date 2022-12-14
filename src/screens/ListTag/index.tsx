@@ -97,7 +97,7 @@ const ListTag = () => {
                     </span>
                     <div className='flex-1 flex flex-wrap'>
                         {listTag.map((tag) => (
-                            <TagItem key={tag.id} {...tag} />
+                            <TagItem key={tag.id} {...tag} setCurPage={setCurPage} />
                         ))}
                     </div>
 

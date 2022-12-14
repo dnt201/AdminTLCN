@@ -1,7 +1,7 @@
 import React from 'react';
 import { XMark } from '@icons/index';
 
-import SureImage from '@images/default-placeholder.png';
+import SureImage from '@images/q.png';
 import { ClipLoader } from 'react-spinners';
 interface iProps {
     isShow: boolean;
