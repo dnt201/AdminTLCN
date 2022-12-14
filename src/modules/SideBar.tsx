@@ -36,9 +36,9 @@ const SideBar = () => {
             icon: <IconAnalytic />,
             submenu: true,
             submenuItems: [
-                { id: 0, title: 'Users', link: '/user' },
-                { id: 1, title: 'Posts', link: '/post' },
-                { id: 2, title: 'Comments', link: '/comment' },
+                { id: 0, title: 'Users', link: '/update' },
+                { id: 1, title: 'Posts', link: '/update' },
+                { id: 2, title: 'Comments', link: '/update' },
             ],
         },
     ];
@@ -65,7 +65,7 @@ const SideBar = () => {
         fixed  invisible overflow-y-auto hover:visible   pt-6  group
         '
         >
-            <div className='flex flex-col visible border-gray-c2  border-r-[1px]  '>
+            <div className='flex flex-col visible justify-between border-gray-c2  border-r-[1px]  '>
                 <div className=' flex justify-center gap-1 items-center mb-1 '>
                     <Logo />
                     <Link to={'/home'}>
@@ -73,7 +73,7 @@ const SideBar = () => {
                     </Link>
                 </div>
                 <hr className='mx-6 border-1.5 border-gray-c2' />
-                <div className=''>
+                <div className='flex-1'>
                     <ul className='pt-2'>
                         {Menus.map((menu, index) => (
                             <React.Fragment key={menu.title}>
@@ -103,22 +103,35 @@ const SideBar = () => {
                                     </span>
 
                                     {menu.submenu && (
-                                        <span onClick={() => setSubmenuOpen(!submenuOpen)}>
+                                        <span
+                                            className='p-1'
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setSubmenuOpen(!submenuOpen);
+                                            }}
+                                        >
                                             {!submenuOpen ? <IconArrowDown /> : <IconArrowUp />}
                                         </span>
                                     )}
                                 </li>
                                 {menu.submenu && submenuOpen && (
-                                    <ul>
+                                    <ul className='flex flex-col'>
                                         {menu.submenuItems.map((submenuItem) => (
-                                            <Link
-                                                to={`analysis/${submenuItem.link}`}
+                                            <button
                                                 key={submenuItem.id}
+                                                onClick={() => {
+                                                    if (submenuItem.link === '/update') {
+                                                        toast.warning(
+                                                            'Tính năng đang được cập nhập! Vui lòng thử lại sau!',
+                                                            { autoClose: 2000 },
+                                                        );
+                                                    } else navigate(`analysis/${submenuItem.link}`);
+                                                }}
                                             >
                                                 <li className='text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-gray-c2 rounded-md'>
                                                     {submenuItem.title}
                                                 </li>
-                                            </Link>
+                                            </button>
                                         ))}
                                     </ul>
                                 )}

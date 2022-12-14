@@ -27,6 +27,7 @@ const userApi = {
 
     getMe: (lazyToken?: string) => {
         const url = `/auth/me`;
+        console.log('getme');
         if (lazyToken !== undefined) {
             let config = {
                 headers: { Authorization: 'Bearer ' + lazyToken },

@@ -15,15 +15,15 @@ import { SkeletonTheme } from 'react-loading-skeleton';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-    // <React.StrictMode>
-    <Provider store={store}>
-        <BrowserRouter>
-            <SkeletonTheme baseColor='#262D34' highlightColor='#444'>
-                <DeClareRouter />
-                <ToastContainer style={{ zIndex: 100000 }} />
-                <Toaster position='bottom-right' containerStyle={{ zIndex: 10100 }} />
-            </SkeletonTheme>
-        </BrowserRouter>
-    </Provider>,
-    // </React.StrictMode>,
+    <React.StrictMode>
+        <Provider store={store}>
+            <BrowserRouter>
+                <SkeletonTheme baseColor='#262D34' highlightColor='#444'>
+                    <DeClareRouter />
+                    <ToastContainer style={{ zIndex: 100000 }} />
+                    <Toaster position='bottom-right' containerStyle={{ zIndex: 10100 }} />
+                </SkeletonTheme>
+            </BrowserRouter>
+        </Provider>
+    </React.StrictMode>,
 );

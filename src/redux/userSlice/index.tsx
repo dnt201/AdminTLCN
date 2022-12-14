@@ -96,6 +96,7 @@ const user = createSlice({
             if (action.payload) state.error = action.payload;
         },
         clearAllUser: (state) => {
+            console.log('clear user');
             state.loading = false;
             state.userInfo = null;
             state.error = '';
@@ -139,11 +140,13 @@ const user = createSlice({
                 action.payload.accessToken.length > 0
             ) {
                 state.message = 'Login successful';
+                console.log('z');
+
                 localStorage.setItem('accessToken', action.payload.accessToken);
                 localStorage.setItem('refreshToken', action.payload.refreshToken);
                 state.accessToken = action.payload.accessToken;
                 state.refreshToken = action.payload.refreshToken;
-                // console.log("faffafsa", userApi.getMe());
+                console.log('fullfiled');
             }
         });
         //logout

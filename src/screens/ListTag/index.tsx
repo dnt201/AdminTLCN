@@ -95,12 +95,13 @@ const ListTag = () => {
                             <b>{paging?.totalElement || 0} </b>post tag
                         </span>
                     </span>
-                    <div className='flex-1 flex flex-wrap justify-evenly mt-1 gap-1'>
-                        {listTag.map((tag) => (
-                            <TagItem key={tag.id} {...tag} setCurPage={setCurPage} />
-                        ))}
+                    <div className='flex-1 '>
+                        <div className='flex  flex-wrap   mt-4 gap-1'>
+                            {listTag.map((tag) => (
+                                <TagItem key={tag.id} {...tag} setCurPage={setCurPage} />
+                            ))}
+                        </div>
                     </div>
-
                     <>
                         <Pagination {...paging} changePageNumber={setCurPage} />
                     </>

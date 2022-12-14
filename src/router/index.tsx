@@ -31,31 +31,26 @@ const DeClareRouter = () => {
     const [beLogged, setLogged] = useState(accessTokenFromLocalStorage !== null);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-    const eventClear = () => {
-        console.log('Eventne');
-        if (accessToken) {
-            navigate('/login');
-            dispatch(clearAllUser());
-        }
-    };
+
     React.useEffect(() => {
         const accessTokenFromLocalStorage = localStorage.getItem('accessToken');
+        console.log('Router nè,', accessTokenFromLocalStorage);
 
         if (accessTokenFromLocalStorage !== null && accessTokenFromLocalStorage.length > 0) {
             setLogged(true);
-            window.addEventListener('storage', (e) => {
-                eventClear();
-            });
 
-            if (userInfo === null && accessTokenFromLocalStorage) dispatch(userGetMe());
+            console.log('Router 1,');
+            // if (userInfo === null && accessTokenFromLocalStorage) dispatch(userGetMe());
             // else dispatch(clearAllUser);
         }
 
         if (error && error === 'Network Error') {
             navigate('/networkError');
+            console.log('Router 2,');
         }
-        if (accessToken === null) {
-            navigate(0);
+        if (accessToken === null || accessTokenFromLocalStorage === null) {
+            navigate('/login');
+            console.log('Router 3,');
         }
     }, [accessToken, accessTokenFromLocalStorage]);
     return (

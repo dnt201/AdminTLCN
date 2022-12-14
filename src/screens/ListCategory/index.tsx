@@ -135,17 +135,18 @@ const ListCategory = () => {
                             <b>{paging?.totalElement || 0} </b>post tag
                         </span>
                     </span>
-                    <div className='flex-1 flex flex-wrap mt-2 justify-evenly items-center'>
-                        {listTag.map((tag) => (
-                            <CategoryItem
-                                key={tag.id}
-                                {...tag}
-                                setCurPage={setCurPage}
-                                hidden={category}
-                            />
-                        ))}
+                    <div className='flex-1 '>
+                        <div className='flex-1 flex flex-wrap mt-2 justify-start items-start'>
+                            {listTag.map((tag) => (
+                                <CategoryItem
+                                    key={tag.id}
+                                    {...tag}
+                                    setCurPage={setCurPage}
+                                    hidden={category}
+                                />
+                            ))}
+                        </div>
                     </div>
-
                     <>
                         <Pagination {...paging} changePageNumber={setCurPage} />
                     </>

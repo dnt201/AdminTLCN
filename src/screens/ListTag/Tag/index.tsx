@@ -54,9 +54,9 @@ const TagItem: React.FC<iProps> = (props) => {
     }, [isConfirm]);
     return (
         <div
-            // style={{ border: ` 1px solid ${colorCode} `, backgroundColor: colorCode  }}
+            style={{ border: ` 1px solid ${colorCode} ` }}
             className={
-                `  w-[calc(33.333%-24px)]  rounded-l-md   relative min-w-[200px] h-fit flex items-center  mb-4  ` +
+                `  w-[calc(33.333%-40px)] mb-4 rounded-l-md mx-4   relative min-w-[200px] h-fit flex items-center   ` +
                 (onHoverDiv ? ' text-white' : ' ')
             }
             onMouseOver={() => {
