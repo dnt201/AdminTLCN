@@ -79,7 +79,7 @@ const ListCategory = () => {
                             i = setTimeout(() => {
                                 setOnChangeInput(false);
                                 setNameSearch(e.target.value);
-                            }, 2000);
+                            }, 3000);
                             return () => {
                                 clearTimeout(i);
                             };

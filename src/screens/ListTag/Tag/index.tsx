@@ -1,5 +1,5 @@
 import { iTag } from '@DTO/Tag';
-import { Trash, Write } from '@icons/index';
+import { Post, Trash, Write } from '@icons/index';
 import defaultIMG from '@images/default.jpg';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ interface iProps extends iTag {
     setCurPage: (n: number) => void;
 }
 const TagItem: React.FC<iProps> = (props) => {
-    const { thumbnailLink, postTagName, id, setCurPage, colorCode } = props;
+    const { thumbnailLink, postTagName, id, setCurPage, colorCode, PostCount } = props;
     const [curTag, setCurTag] = useState<iTag>();
 
     const [onHoverDiv, setOnHoverDiv] = useState(false);
@@ -26,29 +26,37 @@ const TagItem: React.FC<iProps> = (props) => {
                 const addPost = async () => {
                     const toastId = toast.loading('Loading...');
 
-                    const result = await postTagApi.deleteTag(id);
+                    if (PostCount > 0) {
+                        setTimeout(() => {
+                            toast.error('Post tag đang được sử dụng. Không thể xóa!', {
+                                id: toastId,
+                            });
+                        }, 1000);
+                    } else {
+                        const result = await postTagApi.deleteTag(id);
 
-                    setTimeout(() => {
-                        if (
-                            result.status === 200 ||
-                            result.status === 201 ||
-                            result.status === 202
-                        ) {
-                            toast.success('Xóa post tag thành công!', {
-                                id: toastId,
-                                duration: 2000,
-                            });
-                            setCurPage(-1);
-                        } else {
-                            toast.error(`${result.data.message}`, {
-                                id: toastId,
-                                duration: 2000,
-                            });
-                        }
-                    }, 1000);
+                        setTimeout(() => {
+                            if (
+                                result.status === 200 ||
+                                result.status === 201 ||
+                                result.status === 202
+                            ) {
+                                toast.success('Xóa post tag thành công!', {
+                                    id: toastId,
+                                    duration: 2000,
+                                });
+                                setCurPage(-1);
+                            } else {
+                                toast.error(`${result.data.message}`, {
+                                    id: toastId,
+                                    duration: 2000,
+                                });
+                            }
+                        }, 1000);
+                    }
                 };
                 addPost();
-            } else toast.error(`Lỗi rồi, làm ơn thử lại!`);
+            } else toast.error(`Lỗi rồi, Vui lòng thử lại!`);
         }
         setIsConfirm(false);
     }, [isConfirm]);
@@ -106,7 +114,10 @@ const TagItem: React.FC<iProps> = (props) => {
                 src={thumbnailLink === null ? defaultIMG : thumbnailLink}
                 // effect="blur"
             />
-            <h3 className='text-base'>{postTagName}</h3>
+            <div className='flex flex-col'>
+                <h3 className='text-base'>{postTagName}</h3>
+                <span className='text-sm font-thin'>{PostCount} posted</span>
+            </div>
         </div>
     );
 };
