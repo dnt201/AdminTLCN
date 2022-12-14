@@ -10,11 +10,10 @@ import postApi from '@api/postApi';
 import { toast } from 'react-toastify';
 import PostTag from '@components/postTag';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+import { iOption } from '@screens/ListCategory';
 const options = [
     { value: 'approve', label: 'Đã duyệt' },
-    { value: 'not-approve', label: 'Đang đợi phê duyệt' },
-    { value: 'not-approve1', label: 'Đang đợi phê duyệ1t' },
-    { value: 'not-approve2', label: 'Đang đợi phê duyệt1' },
+    { value: 'not-approve', label: 'Đang đợi' },
 ];
 const ListPost = () => {
     // const [currentPage, setCurrentPage] = useState(1);
@@ -29,6 +28,16 @@ const ListPost = () => {
     const [curPage, setCurPage] = useState(1);
     const [filter, setFilter] = useState('approve');
     const navigate = useNavigate();
+
+    const [category, setCategory] = useState<string | null>('approve');
+    const [saveCate, setSaveCate] = useState<iOption[] | null>([
+        { value: 'approve', label: 'Đã duyệt' },
+    ]);
+    const [categoriesOption, setCategoriesOption] = useState<iOption[] | null>([
+        { value: 'approve', label: 'Đã duyệt' },
+        { value: 'not-approve', label: 'Đang đợi' },
+    ]);
+
     useEffect(() => {}, [searchParams]);
 
     const getAllPosted = async () => {
@@ -54,17 +63,17 @@ const ListPost = () => {
         }, 500);
     };
     useEffect(() => {
-        console.log('-----------', curPage, nameSearch, filter);
+        console.log('-----------', curPage, nameSearch, category);
         setLoading(true);
         if (curPage < 0) setCurPage(1);
         else {
-            if (filter === 'approve') {
+            if (category === 'approve') {
                 getAllPosted();
             } else {
                 getAllNeed();
             }
         }
-    }, [curPage, nameSearch, filter]);
+    }, [curPage, nameSearch, category]);
 
     return (
         <div className='flex-1 pl-2 flex flex-col'>
@@ -98,7 +107,26 @@ const ListPost = () => {
                         className='  flex-1   outline-none text-base px-4 pl-1 py-2  '
                     />
                 </div>
-                <select
+                <Select
+                    value={saveCate}
+                    placeholder="Select post's category..."
+                    className='text-primary w-fit z-[99999] mr-2 '
+                    isClearable={false}
+                    options={categoriesOption ? categoriesOption : []}
+                    onChange={(e) => {
+                        console.log(e);
+                        if (e) {
+                            setCategory(e.value);
+                            let z: iOption[] = [];
+                            z.push(e);
+                            setSaveCate(z);
+                        } else {
+                            setCategory(null);
+                            setSaveCate(null);
+                        }
+                    }}
+                />
+                {/* <select
                     className='focus:outline-none p-2 bg-slate-300'
                     onChange={(e) => {
                         {
@@ -116,7 +144,7 @@ const ListPost = () => {
                     <option value='not-approve' selected={filter === 'not-approve'} className='p-1'>
                         Đang đợi
                     </option>
-                </select>
+                </select> */}
             </div>
             {loading ? (
                 <div className='flex-1 flex  justify-center mt-[10vh] gap-1'>

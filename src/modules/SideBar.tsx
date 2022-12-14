@@ -21,18 +21,18 @@ import { toast } from 'react-toastify';
 const SideBar = () => {
     const Menus = [
         { title: 'Dashboard', link: '/home' },
-        { title: 'Users', link: '/users', icon: <IconUser /> },
+        { title: 'Users', link: '/update', icon: <IconUser /> },
         {
             title: 'Posts',
             link: '/posts',
             icon: <IconBlog />,
         },
         { title: 'Tag', link: '/tags', icon: <IconCourse /> },
-        { title: 'Category', link: '/category', icon: <IconCategory /> },
-        { title: 'Comments', link: '/comments', icon: <IconComment /> },
+        { title: 'Category', link: '/categories', icon: <IconCategory /> },
+        { title: 'Comments', link: '/update', icon: <IconComment /> },
         {
             title: 'Analysis',
-            link: '/analysis',
+            link: '/update',
             icon: <IconAnalytic />,
             submenu: true,
             submenuItems: [
@@ -64,7 +64,7 @@ const SideBar = () => {
         '
         >
             <div className='flex flex-col visible border-gray-c2  border-r-[1px]  '>
-                <div className=' flex justify-center '>
+                <div className=' flex justify-center gap-1 items-center mb-1 '>
                     <Logo />
                     <Link to={'/home'}>
                         <h1 className='text-sm  font-OpenSans font-bold'>Teaching Me</h1>
@@ -76,7 +76,14 @@ const SideBar = () => {
                         {Menus.map((menu, index) => (
                             <React.Fragment key={menu.title}>
                                 <li
-                                    onClick={() => navigate(menu.link)}
+                                    onClick={() => {
+                                        if (menu.link === '/update')
+                                            toast.warning(
+                                                'Tính năng đang được cập nhập! Vui lòng thử lại sau!',
+                                                { autoClose: 2500 },
+                                            );
+                                        else navigate(menu.link);
+                                    }}
                                     key={index}
                                     className={
                                         'text-black text-sm flex font-OpenSans items-center gap-x-4 cursor-pointer p-2 hover:bg-gray-c2 rounded-md mt-2 justify-between' +
@@ -115,7 +122,7 @@ const SideBar = () => {
                                 )}
                             </React.Fragment>
                         ))}
-                        <div className='flex-1 h-[1px] bg-slate-600'></div>
+                        <div className='flex-1 h-[1px] border-t-[1px] border-gray-c3'></div>
                         <li
                             onClick={() => {
                                 logoutHandle();

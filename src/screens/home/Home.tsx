@@ -25,8 +25,9 @@ const Home = () => {
         },
     };
     return (
-        <div className='flex flex-col    flex-1 '>
-            <div className='flex justify-between '>
+        <div className='flex flex-col justify-center items-center mb-10 flex-1 '>
+            <h1>Admin teachingMe</h1>
+            {/* <div className='flex justify-between '>
                 {widgets.map((widget) => (
                     <React.Fragment key={widget.title}>
                         <Widget
@@ -48,7 +49,7 @@ const Home = () => {
                 <div className=' flex-1 px-3'>
                     <img src={require('@images/testImg.png')} alt='test' className='rounded-2xl' />
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

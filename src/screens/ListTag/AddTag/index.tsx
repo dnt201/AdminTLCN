@@ -68,6 +68,7 @@ const AddTag = () => {
                 }, 1000);
             };
             addPost();
+            setIsConfirm(false);
         }
     }, [isConfirm]);
     return (

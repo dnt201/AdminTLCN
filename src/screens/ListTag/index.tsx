@@ -78,7 +78,7 @@ const ListTag = () => {
                     className='flex items-center gap-2 my-[2px]  bg-gray-c3 px-2 py-2 rounded-md'
                     onClick={() => navigate('addTag')}
                 >
-                    Add <IconAdd />
+                    Thêm <IconAdd />
                 </button>
             </div>
             {loading ? (
@@ -95,7 +95,7 @@ const ListTag = () => {
                             <b>{paging?.totalElement || 0} </b>post tag
                         </span>
                     </span>
-                    <div className='flex-1 flex flex-wrap'>
+                    <div className='flex-1 flex flex-wrap justify-evenly mt-1 gap-1'>
                         {listTag.map((tag) => (
                             <TagItem key={tag.id} {...tag} setCurPage={setCurPage} />
                         ))}

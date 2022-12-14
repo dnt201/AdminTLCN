@@ -3,6 +3,9 @@ import { clearAllUser, userGetMe } from '@redux/userSlice';
 import BlogDetail from '@screens/BlogDetail';
 
 import Home from '@screens/home/Home';
+import ListCategory from '@screens/ListCategory';
+import AddCategory from '@screens/ListCategory/AddCategory';
+import EditCategory from '@screens/ListCategory/EditCategory/Index';
 
 import ListPost from '@screens/ListPost';
 import ListTag from '@screens/ListTag';
@@ -75,6 +78,13 @@ const DeClareRouter = () => {
                     <Route index element={<ListTag />} />
                     <Route path='addTag' element={<AddTag />} />
                     <Route path='editTag/:tagId' element={<EditTag />} />
+                    {/* <Route path=':courseId' element={<DetailPost />} />
+                    <Route path='new' element={<NewPost />} /> */}
+                </Route>
+                <Route path='categories'>
+                    <Route index element={<ListCategory />} />
+                    <Route path='addCategory' element={<AddCategory />} />
+                    <Route path='editCategory/:categoryId' element={<EditCategory />} />
                     {/* <Route path=':courseId' element={<DetailPost />} />
                     <Route path='new' element={<NewPost />} /> */}
                 </Route>

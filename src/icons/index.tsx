@@ -66,8 +66,9 @@ import ChevronDown from './ChevronDown';
 import ChevronUp from './ChevronUp';
 import Flag from './Flag';
 import ArrowPath from './ArrowPath';
-
+import EyeSlash from './EyeSlash';
 export {
+    EyeSlash,
     ArrowPath,
     Flag,
     ChevronDown,

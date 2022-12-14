@@ -139,7 +139,7 @@ const EditTag = () => {
             </div>
         );
 
-    if (lazyFalse) return <BlogNotFound />;
+    if (lazyFalse || curTag === undefined) return <BlogNotFound />;
     return (
         <div className='flex-1 pl-2 flex flex-col'>
             {isShowConfirm ? (
@@ -183,7 +183,9 @@ const EditTag = () => {
                                 />
                                 <button
                                     className='absolute top-0 right-0 translate-y-1/3 p-[2px] -translate-x-1/3 hover:bg-smoke bg-white text-bg rounded-full'
-                                    onClick={() => setSelectedImage(null)}
+                                    onClick={() => {
+                                        setSelectedImage(null);
+                                    }}
                                 >
                                     <XMark className='w-5 h-5' />
                                 </button>
@@ -258,7 +260,6 @@ const EditTag = () => {
                             setIsShowConfirm(true);
                         }}
                         disabled={
-                            selectedImage === null ||
                             name.length <= 0 ||
                             (curTag?.postTagName === name &&
                                 curTag.colorCode === color &&

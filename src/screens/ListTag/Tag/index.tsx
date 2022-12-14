@@ -10,7 +10,7 @@ interface iProps extends iTag {
     setCurPage: (n: number) => void;
 }
 const TagItem: React.FC<iProps> = (props) => {
-    const { thumbnailLink, postTagName, id, setCurPage } = props;
+    const { thumbnailLink, postTagName, id, setCurPage, colorCode } = props;
     const [curTag, setCurTag] = useState<iTag>();
 
     const [onHoverDiv, setOnHoverDiv] = useState(false);
@@ -54,8 +54,9 @@ const TagItem: React.FC<iProps> = (props) => {
     }, [isConfirm]);
     return (
         <div
+            // style={{ border: ` 1px solid ${colorCode} `, backgroundColor: colorCode  }}
             className={
-                'w-1/3  relative min-w-[200px] h-fit flex items-center  mb-4  ' +
+                `  w-[calc(33.333%-24px)]  rounded-l-md   relative min-w-[200px] h-fit flex items-center  mb-4  ` +
                 (onHoverDiv ? ' text-white' : ' ')
             }
             onMouseOver={() => {
