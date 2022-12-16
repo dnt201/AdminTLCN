@@ -168,7 +168,7 @@ const ListPost = () => {
                                 key={post.id}
                                 {...post}
                                 myPost={true}
-                                approve={filter === 'not-approve' ? true : false}
+                                approve={category === 'not-approve' ? true : false}
                             />
                         ))}
                     </div>
