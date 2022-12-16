@@ -110,7 +110,7 @@ const MidContent: React.FC<iMidContentProps> = (props) => {
                                           onClick={(e) => {
                                               console.log(tag);
 
-                                              navigate(`/tags/${tag.id}`);
+                                              navigate(`/tags/editTag/${tag.id}`);
                                               console.log('navigate qua all post of tag');
                                               e.preventDefault();
                                           }}
