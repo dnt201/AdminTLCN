@@ -14,7 +14,7 @@ const postTagApi = {
             url = `/post/post-tag?name=${nameTag}`;
         else url = `/post/post-tag`;
         return axiosClient.post(url, {
-            size: 9,
+            size: 18,
             pageNumber: pageNumber || 1,
         });
     },

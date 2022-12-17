@@ -1,5 +1,4 @@
 import { AppDispatch, RootState } from '@app/store';
-import { clearAllUser, userGetMe } from '@redux/userSlice';
 import BlogDetail from '@screens/BlogDetail';
 
 import Home from '@screens/home/Home';
@@ -29,7 +28,6 @@ const DeClareRouter = () => {
     const { error, accessToken, userInfo } = useSelector((state: RootState) => state.users);
     console.log(accessTokenFromLocalStorage !== null);
     const [beLogged, setLogged] = useState(accessTokenFromLocalStorage !== null);
-    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
     React.useEffect(() => {

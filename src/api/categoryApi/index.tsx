@@ -11,14 +11,14 @@ const categoryApi = {
             url = `/category?name=${nameTag}`;
         else url = `/category`;
         return axiosClient.post(url, {
-            size: 9,
+            size: 18,
             pageNumber: pageNumber || 1,
         });
     },
     getAllCategoryHidden: (pageNumber?: number, nameTag?: string) => {
         const url = `/category/delete?name=${nameTag}`;
         return axiosClient.post(url, {
-            size: 9,
+            size: 18,
             pageNumber: pageNumber || 1,
         });
     },
